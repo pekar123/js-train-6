@@ -11,9 +11,8 @@ console.log("person", person); // Виведе {name: "John", age: 25}
 //Завдання 2. Cтворіть об'єкт personLarge який буде мати такі ж поля як person ,
 // та вкладений об'єкт address з полями  street: "123 Main St", city: "New York", country: "USA",
 let personLarge = {
-  name:'John',
-  age:25,
-  adress:{street: "123 Main St", city: "New York", country: "USA"},
+  ...person,
+  address:{street: "123 Main St", city: "New York", country: "USA"},
   //використовуємо деструктурізацію на об'єкті person
   //створюємо об'єкт address
 };
@@ -35,9 +34,8 @@ var animal = {
 
 // Функція для створення нового об'єкта з тими ж властивостями
 function copyObject(obj) {
-  let animal = {obj};
-  return animal
-  
+   
+  return {...obj};
   // Використовуємо синтаксис деструктурізації {...person} для створення нового об'єкта з тими ж властивостями
   // Повертаємо новий об'єкт
 }
@@ -53,11 +51,11 @@ let fruit = {
 };
 // Функція для перевірки наявності властивості в об'єкті
 function hasProperty(obj, property) {
-   let n = property in obj;
-   if(n===true){
-     return `Property ${property} exists`
+   let exists  = property in obj;
+   if(exists){
+     return `Property ${property} exists.`;
    }else{
-    return `Property ${property} does not exist`
+    return `Property ${property} does not exist.`;
    }
   
   // Використовуємо оператор "in" для перевірки наявності властивості
@@ -238,6 +236,8 @@ let car = {
   brand: "BMW",
   year: 2022,
 };
+
+
 // Створюємо функцію, яка приймає об'єкт як аргумент і використовує деструктуризацію зі значенням за замовчуванням
 // brand за замовчуванням призначемо Unknown, year за замовчуванням призначемо 0, country за замовчуванням призначемо Unknown
 
@@ -245,7 +245,7 @@ function showCarInfo({
   brand = "Unknown",
   year = 0,
   country = "Unknown",
-} = {}) {
+} = {}, ) {
   
   
   return {
@@ -257,13 +257,12 @@ function showCarInfo({
 }
 
 console.log("Завдання 13 ====================================");
-console.log(showCarInfo(car)); // Виведе { brand: 'BMW', year: 2022, country: 'Unknown' }
+console.log(showCarInfo(car, )); // Виведе { brand: 'BMW', year: 2022, country: 'Unknown' }
 
 // Завдання 14: Додайте нову властивість до вбудованого об'єкту Array через літерал.
 // Створюємо функцію, яка буде додавати нову властивість до масиву
 function addProperty(array) {
-  Object.defineProperty(Array.prototype, 'customProperty', {
-    value: 'myProperty'});
+  Array.prototype.customProperty='myProperty';
   return array
   // Додаємо нову властивість customProperty до прототипу Array зі значенням myProperty
   // Повертаємо переданий масив з новою властивістю
